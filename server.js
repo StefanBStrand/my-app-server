@@ -1,3 +1,8 @@
+require("dotenv").config;
+// dotenv = a lightweight NOde.Js module that loads environment variables from a .env file into process.env
+
+/* The core purpose of dotenv is to separate configuration from code. Developers define sensitive or environment-dependent variables—such as API keys, database URLs, and tokens—within a .env file. When require('dotenv').config() is called, these values are automatically injected into process.env, making them accessible throughout the application without hardcoding secrets. */
+
 const app = require("./app"); // importing the Express app configured in app.js. THis gives fully prepared app (routes, middleware.etc)
 // app = the Express application!
 

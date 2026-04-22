@@ -3,7 +3,7 @@ const usersStore = require("../data/usersStore"); // import data layer - fake DB
 // service talks to data layer, NOT directly to Express..
 
 // Define service function (business logic), not tied to any HTTP, no req/res here
-function registerUser(email, password) {
+async function registerUser(email, password) {
     // input validation, simple way. Both fields required.
     if (!email || !password) {
         return {
@@ -14,6 +14,7 @@ function registerUser(email, password) {
     }
 
     // aCall data layer to store user - no DB here right now, just in-memory array.
+    //( this will soon be await pool.query... )
     usersStore.addUser({ email, password });
 
     //return success result. Service returns plain JS object. IMPORTANT - service returns this, but controller decides: status code, JSON response..

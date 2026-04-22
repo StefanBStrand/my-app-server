@@ -5,13 +5,14 @@ const { registerUser } = require("../services/authService");
 // responses. Express is. a web framework.
 
 // define controller function - this function handles incoming HTTP request -  function register = route handler..
-function register(req, res) {
+// making function async - bc we will await service call!
+async function register(req, res) {
     // extract data from request body (through object destructuring) (sent from client!). reg.body comes from express.json() middleware
     // destructuring isntead of: const email = req.body.email; and const password = req.body.password.
     const { email, password } = req.body; // req.body is populated by the express.json middleware. middleware parses data - puts into req.body.
 
-    // Call service layer (business logic)
-    const result = registerUser(email, password);
+    // Call service layer (business logic). await service (for future DB Call PG)
+    const result = await registerUser(email, password);
     // error case handling
     if (!result.ok) {
         return res.status(result.status).json({
@@ -34,3 +35,8 @@ module.exports = { register };
 // the request object express creates. and res Response, the response object created with what i send back).
 // req (request) -> everything the client sends
 // res (response) -> what I send back
+
+// ASync operations: HTTP requests (fetch, API Calls)
+// database queries (pg, prisma)
+// file system (readFIle)
+// basically all operations involving waiting for external resources, like network, db, or files.
